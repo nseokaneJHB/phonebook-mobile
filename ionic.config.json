@@ -1,0 +1,7 @@
+{
+  "name": "phonebook-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
