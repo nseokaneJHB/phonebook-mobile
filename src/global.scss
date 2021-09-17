@@ -24,3 +24,38 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Grechen+Fuemen&family=Fredericka+the+Great&display=swap');
+
+.page__header{
+	font-weight: 800 !important;
+	font-size: 2em !important;
+	font-style: italic;
+}
+
+.custom__card{
+	font-weight: bolder;
+	font-size: large;
+	color: white;
+
+	.card__body{
+		padding: 0;
+	}
+}
+
+.phonebook__contact{
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	display: flex;
+	height: 80vh;
+	padding: 1em;
+	gap: .3em;
+
+	.action__icons{
+		background-color: transparent;
+		margin-top: .5em;
+		display: flex;
+		gap: .5em;
+	}
+}

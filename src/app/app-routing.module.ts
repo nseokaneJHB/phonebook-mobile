@@ -2,21 +2,33 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
+	{
+		path: 'home',
+		loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+	},
+	{
+		path: '',
+		redirectTo: 'home',
+		pathMatch: 'full'
+	},
+	{
+		path: 'add-phonebook',
+		loadChildren: () => import('./phonebook-form/phonebook-form.module').then( m => m.PhonebookFormPageModule)
+	},
+	{
+		path: 'update-phonebook/:id',
+		loadChildren: () => import('./phonebook-form/phonebook-form.module').then( m => m.PhonebookFormPageModule)
+	},
+	{
+		path: 'view-phonebook/:id',
+		loadChildren: () => import('./phonebook/phonebook.module').then( m => m.PhonebookPageModule)
+	},
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
-  exports: [RouterModule]
+	imports: [
+		RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+	],
+	exports: [RouterModule]
 })
 export class AppRoutingModule { }
