@@ -1,20 +1,27 @@
 <ion-header>
 	<ion-toolbar color="tertiary">
 		<ion-item lines="none" color="tertiary" routerLink="/home">
-			<ion-label class="page__header">Phonebook</ion-label>
+			<ion-label style="font-size: larger; font-weight: bolder;">Back</ion-label>
 		</ion-item>
+
+		<ion-buttons slot="primary">
+			<ion-button color="secondary" (click)="openActions()">
+			  	<ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+			</ion-button>
+		</ion-buttons>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 	<ion-card class="custom__card">
 		<ion-card-content class="card__body phonebook__contact">
-			<h1>{{ phonebook.name | titlecase }}</h1>
-			<h2>{{ phonebook.email }}</h2>
-			<h2>0{{ phonebook.phone }}</h2>
+			<img class="phonebook__img" src="" alt="">
+			<h1 class="phonebook__text">{{ phonebook.name | titlecase }}</h1>
+			<h3 class="phonebook__text">{{ phonebook.email }}</h3>
+			<h3 class="phonebook__text">0{{ phonebook.phone }}</h3>
 			<ion-list class="action__icons">
-				<ion-icon (click)="callContact(phonebook)" color="tertiary" name="call-outline" size="large"></ion-icon>
-				<ion-icon (click)="EmailContact(phonebook)" color="tertiary" name="mail-outline" size="large"></ion-icon>
+				<ion-icon (click)="callContact(phonebook)" name="call-outline" size="large"></ion-icon>
+				<ion-icon *ngIf="phonebook.email" (click)="EmailContact(phonebook)" name="mail-outline" size="large"></ion-icon>
 			</ion-list>
 		</ion-card-content>
 	</ion-card>

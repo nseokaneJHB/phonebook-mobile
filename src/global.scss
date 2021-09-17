@@ -33,15 +33,40 @@
 	font-style: italic;
 }
 
+.custom__toaster{
+	font-weight: bolder;
+	text-align: center;
+}
+
 .custom__card{
+	color: var(--ion-color-step-800);
 	font-weight: bolder;
 	font-size: large;
-	color: white;
+	box-shadow: none;
+	padding: 0 .5em;
+
+	&.form__button{
+		background-color: transparent;
+		max-width: 300px;
+		margin: auto;
+		padding: 0;
+	}
 
 	.card__body{
 		padding: 0;
 	}
+
+	.sc-ion-label-md-h.sc-ion-label-md-s.label-floating.hydrated{
+		color: var(--ion-color-tertiary);
+		font-weight: bold;
+	}
+
+	.native-input{
+		font-size: smaller;
+	}
 }
+
+// ================================================= One phonebook =================================================
 
 .phonebook__contact{
 	justify-content: center;
@@ -52,10 +77,43 @@
 	padding: 1em;
 	gap: .3em;
 
+	.phonebook__img{
+		border: 1px solid var(--ion-color-tertiary);
+		margin-bottom: .5em;
+		border-radius: 50%;
+		overflow: hidden;
+		height: 100px;
+		width: 100px;
+
+		&::before{
+			border-radius: 50%;
+			content: "";
+		}
+	}
+
+	.phonebook__text{
+		word-break: break-all;
+		letter-spacing: 2px;
+		font-weight: bolder;
+		text-align: center;
+	}
+
 	.action__icons{
 		background-color: transparent;
-		margin-top: .5em;
+		cursor: pointer;
 		display: flex;
 		gap: .5em;
+
+		.icon-large.hydrated{
+			color: var(--ion-color-tertiary);
+			border-radius: .5em;
+			padding: .3em;
+		}
+
+		.icon-large.hydrated:hover{
+			border: 1px solid var(--ion-color-tertiary-shade);
+			padding: .265em .25em;
+			margin: 0;
+		}
 	}
 }

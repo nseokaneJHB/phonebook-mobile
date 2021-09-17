@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ActionSheetController, AlertController } from '@ionic/angular';
 import { PhonebookService } from '../services/phonebook.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { PhonebookService } from '../services/phonebook.service';
 })
 export class PhonebookPage implements OnInit {
 
-	constructor(private __phonebook: PhonebookService, private __route: ActivatedRoute) { }
+	constructor(private __phonebook: PhonebookService, private __route: ActivatedRoute, public __action: ActionSheetController, private __router: Router, private __alert: AlertController) { }
 
 	phonebook: any = {};
 
@@ -17,9 +18,58 @@ export class PhonebookPage implements OnInit {
 
 	async ionViewDidEnter(){
 		const phonebookId = this.__route.snapshot.params;
-		if (!phonebookId.id) return console.log('Could not find the id;');
+		if (!phonebookId.id) return this.__phonebook.showToaster({ message: 'Could not find the id;', color: 'danger' });
 		this.phonebook = await this.__phonebook.getOnePhonebook(phonebookId.id);
-		console.log(this.phonebook);
+	}
+
+	async openActions() {
+		const actionSheet = await this.__action.create({
+			header: 'Contact Actions',
+			cssClass: 'contact__actions',
+			buttons: [
+				{
+					text: 'Update',
+					icon: 'create-outline',
+					handler: () => {
+						this.__router.navigate([`/update-phonebook/${this.phonebook.id}`])
+					}
+				}, {
+					text: 'Delete',
+					role: 'destructive',
+					icon: 'trash-outline',
+					handler: () => {
+						this.openAlert();
+					}
+				}, {
+					text: 'Cancel',
+					icon: 'close',
+					role: 'cancel',
+				}
+			]
+		});
+		await actionSheet.present();
+	}
+
+	async openAlert() {
+		const alert = await this.__alert.create({
+			cssClass: 'delete__alert',
+			header: 'Delete Contact!',
+			message: `Are you sure you want to delete <strong>${this.phonebook.name}</strong>'s number?`,
+			buttons: [
+				{
+					text: 'Cancel',
+					role: 'cancel',
+					cssClass: 'secondary'
+				}, {
+					text: 'Yes',
+					handler: () => {
+						this.__phonebook.deleteOnePhonebook(this.phonebook.id);
+					}
+				}
+			]
+		});
+	
+		await alert.present();
 	}
 
 	callContact(contact: any){
