@@ -117,3 +117,15 @@
 		}
 	}
 }
+
+.search__wrapper{
+	max-width: 600px;
+	padding: 1em;
+	margin: auto;
+}
+
+.custom__loader .loading-wrapper.ion-overlay-wrapper{
+	background-color: var(--ion-color-tertiary);
+	border-radius: 1em;
+	height: 50px;
+}

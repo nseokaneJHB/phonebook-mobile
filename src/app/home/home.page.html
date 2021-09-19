@@ -8,6 +8,11 @@
 
 <ion-content [fullscreen]="true">
 
+	<ion-item class="search__wrapper">
+		<ion-label><ion-icon name="search-outline"></ion-icon></ion-label>
+		<ion-input placeholder="Search contact..." (ionInput)="searchContact($event.target.value)"></ion-input>
+	</ion-item>
+
 	<ng-container *ngIf="phonebookList.length && phonebookList.length > 0; else elseTemplate">
 		<ion-card class="custom__card" *ngFor="let phonebook of phonebookList">
 			<ion-card-content class="card__body">

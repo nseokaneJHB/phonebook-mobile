@@ -16,6 +16,7 @@ export class HomePage implements OnInit {
 	phonebookList: any = [];
 
 	async ionViewDidEnter(){
+		this.__phonebook.showLoading();
 		this.phonebookList = await this.__phonebook.getAllPhonebooks();
 	}
 
@@ -40,6 +41,10 @@ export class HomePage implements OnInit {
 		});
 	
 		await alert.present();
-	  }
+	}
+
+	async searchContact(search: string){
+		this.phonebookList = await this.__phonebook.searchPhonebook(search);
+	}
 
 }

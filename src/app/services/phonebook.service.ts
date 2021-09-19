@@ -3,18 +3,19 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class PhonebookService {
 
-	constructor(private __http: HttpClient, private __router: Router, private __toast: ToastController) {}
+	constructor(private __http: HttpClient, private __router: Router, private __toast: ToastController, private __loader: LoadingController) {}
 
 	url = environment.url;
 
 	addNewPhonebook(phonebook: any){
+		this.showLoading();
 		this.__http.post(`${this.url}`, phonebook).subscribe((res: any) => {
 			this.showToaster({ message: 'Contact added!', color: 'success' });
 			this.__router.navigate(['/']);
@@ -73,5 +74,15 @@ export class PhonebookService {
 			duration: 3000
 		});
 		toast.present();
+	}
+
+	async showLoading() {
+		const loading = await this.__loader.create({
+		  cssClass: 'custom__loader',
+		  message: 'Loading...',
+		  duration: 2000
+		});
+		
+		await loading.present();
 	}
 }
