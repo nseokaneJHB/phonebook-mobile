@@ -18,10 +18,11 @@
 			<img class="phonebook__img" src="" alt="">
 			<h1 class="phonebook__text">{{ phonebook.name | titlecase }}</h1>
 			<h3 class="phonebook__text">{{ phonebook.email }}</h3>
-			<h3 class="phonebook__text">0{{ phonebook.phone }}</h3>
+			<h3 class="phonebook__text">+{{ phonebook.phone }}</h3>
 			<ion-list class="action__icons">
-				<ion-icon (click)="callContact(phonebook)" name="call-outline" size="large"></ion-icon>
-				<ion-icon *ngIf="phonebook.email" (click)="EmailContact(phonebook)" name="mail-outline" size="large"></ion-icon>
+				<ion-icon (click)="__phonebook.placeCall(phonebook)" name="call-outline" size="large"></ion-icon>
+				<ion-icon (click)="__phonebook.sendSMS(phonebook)" name="chatbubble-ellipses-outline" size="large"></ion-icon>
+				<ion-icon *ngIf="phonebook.email" (click)="__phonebook.sendEmail(phonebook)" name="mail-outline" size="large"></ion-icon>
 			</ion-list>
 		</ion-card-content>
 	</ion-card>

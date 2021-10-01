@@ -5,18 +5,21 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { SMS } from '@ionic-native/sms/ngx';
+
 @Injectable({
 	providedIn: 'root'
 })
 export class PhonebookService {
 
-	constructor(private __http: HttpClient, private __router: Router, private __toast: ToastController, private __loader: LoadingController) {}
+	constructor(private __http: HttpClient, private __router: Router, private __toast: ToastController, private __loader: LoadingController, private __call: CallNumber, private __sms: SMS) {}
 
 	url = environment.url;
 
 	addNewPhonebook(phonebook: any){
 		this.showLoading();
-		this.__http.post(`${this.url}`, phonebook).subscribe((res: any) => {
+		this.__http.post(`${this.url}`, { ...phonebook, phone: `+27${phonebook.phone}`}).subscribe((res: any) => {
 			this.showToaster({ message: 'Contact added!', color: 'success' });
 			this.__router.navigate(['/']);
 		}, (err: any) => {
@@ -84,5 +87,17 @@ export class PhonebookService {
 		});
 		
 		await loading.present();
+	}
+
+	placeCall(phonebook: any){
+		this.__call.callNumber(`+27845394450`, true).then((res: any) => console.log('Launched dialer!', res)).catch((err: any) => console.log('Error launching dialer', err));
+	}
+
+	sendSMS(phonebook: any){
+		this.__sms.send(`+27845394450`, 'Hello testing ionic');
+	}
+
+	sendEmail(phonebook: any){
+		console.log(phonebook);
 	}
 }

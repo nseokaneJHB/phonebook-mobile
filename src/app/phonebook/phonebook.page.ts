@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { SMS } from '@ionic-native/sms/ngx';
 import { ActionSheetController, AlertController } from '@ionic/angular';
 import { PhonebookService } from '../services/phonebook.service';
 
@@ -10,7 +12,7 @@ import { PhonebookService } from '../services/phonebook.service';
 })
 export class PhonebookPage implements OnInit {
 
-	constructor(private __phonebook: PhonebookService, private __route: ActivatedRoute, public __action: ActionSheetController, private __router: Router, private __alert: AlertController) { }
+	constructor(public __phonebook: PhonebookService, private __route: ActivatedRoute, public __action: ActionSheetController, private __router: Router, private __alert: AlertController) { }
 
 	phonebook: any = {};
 
@@ -70,13 +72,5 @@ export class PhonebookPage implements OnInit {
 		});
 	
 		await alert.present();
-	}
-
-	callContact(contact: any){
-		console.log(contact);
-	}
-
-	EmailContact(contact: any){
-		console.log(contact);
 	}
 }

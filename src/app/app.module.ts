@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { SMS } from '@ionic-native/sms/ngx';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -19,7 +21,11 @@ import { HttpClientModule } from '@angular/common/http';
 		AppRoutingModule,
 		HttpClientModule,
 	],
-	providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+	providers: [
+		{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+		CallNumber,
+		SMS,
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

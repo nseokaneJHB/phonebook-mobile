@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, isPlatform } from '@ionic/angular';
 import { PhonebookService } from "../services/phonebook.service";
 
 @Component({
@@ -9,7 +9,7 @@ import { PhonebookService } from "../services/phonebook.service";
 })
 export class HomePage implements OnInit {
 
-	constructor(private __phonebook: PhonebookService,  private __alert: AlertController) {}
+	constructor(public __phonebook: PhonebookService,  private __alert: AlertController) {}
 
 	ngOnInit(): void {}
 
@@ -46,5 +46,4 @@ export class HomePage implements OnInit {
 	async searchContact(search: string){
 		this.phonebookList = await this.__phonebook.searchPhonebook(search);
 	}
-
 }
